@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.driver.SolrDriver;
 import com.example.demo.model.Html;
-import com.example.demo.repository.HtmlRepository;
+//import com.example.demo.repository.HtmlRepository;//mongo disabled
 
 @RestController
 public class SolrMainController{
-	@Autowired
-	private HtmlRepository repository;
+//	@Autowired
+//	private HtmlRepository repository; //mongo disabled
 	
 	@RequestMapping("/saveHtml")
 	public String findTest(HttpServletRequest request) throws Exception {
@@ -30,10 +30,10 @@ public class SolrMainController{
 		Random random = new Random();
 		int nextInt = random.nextInt();
 		System.out.println("nextInt: "+nextInt);
-		repository.save(new Html("subject test "+nextInt,"body test "+nextInt));
-		System.out.println(repository.findBySubject("subject test "+nextInt).subject);
+//		repository.save(new Html("subject test "+nextInt,"body test "+nextInt));
+//		System.out.println(repository.findBySubject("subject test "+nextInt).subject);
 		
-		if (repository.findBySubject("subject test "+nextInt) != null){
+//		if (repository.findBySubject("subject test "+nextInt) != null){
 			
 			SolrInputDocument solrDoc = new SolrInputDocument();
             solrDoc.addField("subject", "subject test "+nextInt);
@@ -47,12 +47,14 @@ public class SolrMainController{
 				SolrDriver.solr.commit();
 			} catch (SolrServerException e) {
 				e.printStackTrace();
+				return "fail";
 			} catch (IOException e) {
 				e.printStackTrace();
+				return "fail";
 			}
             return "success";
-		}else{
-			return "fail";
-		}
+//		}else{
+//			return "fail";
+//		}
 	}
 }
