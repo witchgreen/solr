@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<meta charset="UTF-8" />
+
+<title>Mongo Insert</title>
+<script src="https://code.jquery.com/jquery-3.2.0.js"></script>
+<script>
+
+$.ajax({url : 'http://localhost:8080/saveHtml'}).done(function(result)
+{
+	document.body.innerHTML = "결과: "+ result;
+}).fail(function(error)
+{
+	console.log('html 로딩 실패');	
+});
+	
+</script>
+</head>
+
+<body>
+</body>
+
+</html>
