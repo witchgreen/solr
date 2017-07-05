@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="com.example.demo.mapper.HtmlMapper">
+ 
+    <insert id="insertHtml" parameterType="com.example.demo.model.Html">
+        insert into SAMPLE_HTML
+            values
+        (SAMPLE_HTML_SEQ.nextval, #{subject}, #{body}, #{author})
+    </insert>
+    
+    <select id="selectHtmlList" resultType="com.example.demo.model.Html">
+        select SEQ, SUBJECT, BODY, AUTHOR from SAMPLE_HTML
+    </select>
+ 
+</mapper>
