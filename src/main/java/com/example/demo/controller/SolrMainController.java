@@ -8,13 +8,20 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 //import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.driver.SolrDriver;
 import com.example.demo.mapper.HtmlMapper;
@@ -22,6 +29,8 @@ import com.example.demo.model.Html;
 
 @Controller
 public class SolrMainController{
+	
+	private static Logger logger = Logger.getLogger(SolrMainController.class);
 	
     @Autowired
     private HtmlMapper htmlMapper;
@@ -123,5 +132,33 @@ public class SolrMainController{
 //			return "fail";
 //		}
 	}
+	
+	@RequestMapping("/solrsearch")
+	public String getSolrSearchJsp(HttpServletRequest request) throws Exception {
+		return "solrsearch";
+	}
+	
+//	@RequestMapping("/solrSearchBtnClick")
+//	public @ResponseBody ModelAndView getSolrSearch(HttpServletRequest request)throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		String q = request.getParameter("q");
+//		logger.info("q : "+q);
+//		
+//		if(!"".equals(q)) {
+//			SolrQuery query = new SolrQuery();
+//			query.setQuery(q);
+//			
+//			QueryResponse responseSolr = SolrDriver.solr.query(query);
+//		    SolrDocumentList results = responseSolr.getResults();
+//		    
+//		    mav.addObject("q", q);
+//		    mav.addObject("listview", results.toArray());
+//		    logger.info(results.toArray());
+//		    mav.setViewName("solrsearch");
+//		}
+//		
+//		return mav;
+//		
+//	}
 	
 }
